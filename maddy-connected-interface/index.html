@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MADDY — Your Personal AI Assistant</title>
+<style>
+:root{--blue:#1768f5;--blue2:#3d8bff;--ink:#0f3470;--muted:#6480a8;--line:#d8e7fb;--panel:#fff;--bg:#f4f8ff;--pale:#eaf2ff;--green:#10b981;--orange:#f6a623;--red:#ef6262;--shadow:0 5px 22px #245da30b}*{box-sizing:border-box}body{margin:0;font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#f8fbff,#edf5ff);color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}.app{min-height:100vh;display:grid;grid-template-columns:232px minmax(0,1fr)}.sidebar{border-right:1px solid var(--line);background:#ffffffd9;padding:20px 12px;display:flex;flex-direction:column;gap:22px}.brand{display:flex;align-items:center;gap:10px;padding:0 8px 10px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#398cff,#0751e9);display:grid;place-items:center;color:white;font-size:24px;box-shadow:0 7px 15px #1768f530}.brand strong{display:block;font-size:22px;letter-spacing:2px;color:#1768e9;line-height:1.05}.brand small{font-size:10px;color:#6480a8}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#28518b;text-align:left;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center}.nav button span{font-size:18px;width:22px;text-align:center}.nav button.active,.nav button:hover{background:linear-gradient(90deg,#2879ff,#408fff);color:white;box-shadow:0 6px 15px #2473ef25}.sidebar-note{margin-top:auto;border-radius:16px;padding:18px 16px;background:linear-gradient(150deg,#e3eeff,#cfe1ff);min-height:150px;display:flex;flex-direction:column;justify-content:end;color:#1453b8}.sidebar-note .house{font-size:34px;margin-bottom:12px}.sidebar-note strong{font-size:16px;max-width:150px}.sidebar-note small{margin-top:8px}.main{min-width:0}.topbar{height:70px;background:#ffffffdb;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:18px;padding:0 22px;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}.search{flex:1;max-width:650px;display:flex;gap:10px;align-items:center;border:1px solid #cbdffc;background:#fff;border-radius:30px;padding:10px 15px;color:#7590b5}.search input{border:0;outline:0;flex:1;min-width:0;color:var(--ink);background:transparent}.top-actions{margin-left:auto;display:flex;align-items:center;gap:18px}.iconbtn{border:1px solid var(--line);background:#fff;color:#2362c7;border-radius:11px;padding:9px}.profile{display:flex;align-items:center;gap:10px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#d9e9ff;color:#135bd1;font-weight:800}.profile small{display:block;color:var(--muted);font-size:11px}.content{padding:16px;max-width:1900px;margin:auto}.layout{display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:14px}.center{min-width:0;display:grid;gap:14px;align-content:start}.right{display:grid;gap:12px;align-content:start;min-width:0}.hero-row{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:12px}.hero{min-height:190px;border:1px solid #c9e0ff;border-radius:16px;overflow:hidden;position:relative;padding:20px;background:linear-gradient(90deg,#dcecff 0%,#dcecffed 37%,#dcecff55 62%,#dcecff00),url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85') center/cover}.hero h1{font-size:24px;margin:0 0 8px;letter-spacing:-.5px}.hero p{max-width:300px;margin:0;color:#315b91}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.pill{background:#ffffffdb;border:1px solid #e0ebfb;border-radius:12px;padding:8px 10px;display:flex;gap:8px;align-items:center;font-size:11px;min-width:105px}.pill b{display:block;font-size:12px;color:#1757b3}.pill .dot{font-size:19px}.weather,.panel,.feature{border:1px solid var(--line);background:#ffffffd9;border-radius:15px;box-shadow:var(--shadow)}.weather{padding:18px;display:flex;flex-direction:column;justify-content:center}.weather-top{display:flex;gap:10px;align-items:center}.weather-icon{font-size:36px}.weather strong{font-size:28px;letter-spacing:-1px}.weather p{margin:0;color:var(--muted);font-size:12px}.weather hr{border:0;border-top:1px solid var(--line);width:100%;margin:14px 0}.features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.feature{padding:14px;display:flex;align-items:center;gap:12px;text-align:left;color:var(--ink);transition:.15s}.feature:hover{transform:translateY(-2px);border-color:#8bbaff}.feature-icon{width:54px;height:54px;flex:0 0 54px;border-radius:50%;display:grid;place-items:center;background:#e4efff;color:#1768f5;font-size:25px}.feature:nth-child(3) .feature-icon{background:#f0e7ff;color:#8c48e8}.feature b{display:block;font-size:13px}.feature small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.feature .arrow{margin-left:auto;color:#3776d5}.twocol{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:12px}.panel{padding:15px;min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.panel-head h2{font-size:14px;margin:0;display:flex;align-items:center;gap:9px}.panel-head h2 span{font-size:18px;color:var(--blue)}.subtle{font-size:11px;color:var(--muted)}.linkbtn{border:0;background:transparent;color:#1768e9;font-size:12px;padding:4px}.device-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.device{border:1px solid #d9e7fb;border-radius:12px;padding:11px;min-width:0;background:linear-gradient(140deg,#fff,#f8fbff)}.device-top{display:flex;align-items:center;gap:9px}.device-icon{width:36px;height:36px;flex:0 0 36px;border-radius:50%;background:#e9f2ff;display:grid;place-items:center;font-size:19px}.device-name{font-size:11px;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.device-meta{font-size:10px;color:var(--muted);margin-top:4px}.device-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:8px}.switch{width:36px;height:20px;border:0;border-radius:20px;background:#b7c8df;padding:3px;display:flex;align-items:center}.switch i{width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0002;transition:.15s}.switch.on{background:#2675ff;justify-content:flex-end}.switch.door{background:#10b981}.energy-content{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;align-items:center}.donut{width:138px;height:138px;border-radius:50%;background:conic-gradient(#f16c76 0 18%,#8c71f6 18% 38%,#347dff 38% 65%,#20b9c7 65% 83%,#28c77a 83%);display:grid;place-items:center;position:relative}.donut:before{content:"";position:absolute;inset:12px;background:white;border-radius:50%}.donut-inner{position:relative;text-align:center}.donut-inner b{font-size:20px;display:block}.donut-inner small{font-size:10px;color:var(--muted)}.cost{font-size:11px;color:var(--muted)}.cost strong{font-size:21px;color:#1454ae;display:block;margin:2px 0}.positive{color:#0ca678;font-size:11px}.legend{display:grid;gap:7px;margin-top:12px}.legend-row{display:flex;align-items:center;gap:7px;font-size:11px}.legend-row small{margin-left:auto;color:var(--muted)}.swatch{width:8px;height:8px;border-radius:3px;background:#347dff}.chart{width:100%;height:165px;display:block}.lower{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.75fr) minmax(0,.8fr);gap:12px}.range{display:flex;gap:4px}.range button{border:1px solid var(--line);background:#fff;color:#5676a2;border-radius:18px;padding:4px 8px;font-size:10px}.range button.active{background:var(--blue);border-color:var(--blue);color:#fff}.med-list{display:grid;gap:8px}.med-item{display:flex;align-items:center;gap:9px;padding:7px;border-bottom:1px solid #edf2fa}.med-item:last-child{border-bottom:0}.med-icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffe7e5;font-size:17px}.med-item b,.trip b{display:block;font-size:11px}.med-item small,.trip small{font-size:10px;color:var(--muted)}.trip-img{height:86px;border-radius:10px;background:url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=500&q=80') center/cover;margin-bottom:9px}.trip .rating{color:#f2a900;font-size:11px}.primary{border:0;background:linear-gradient(90deg,#1768f5,#3c8cff);color:#fff;border-radius:10px;padding:10px 12px;font-weight:650;font-size:12px;box-shadow:0 5px 12px #1768f51b}.primary:hover{filter:brightness(1.04)}.outline{border:1px solid #a9c9fb;background:white;color:#1768e9;border-radius:10px;padding:9px 12px;font-size:12px}.activity-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.activity{border:1px solid var(--line);border-radius:11px;padding:9px;display:flex;align-items:center;gap:8px;min-width:0}.activity .bubble{width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:#e5f0ff;display:grid;place-items:center}.activity b{font-size:10px;display:block}.activity small{font-size:9px;color:var(--muted)}.assistant{padding:0;overflow:hidden}.assistant-head{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:1px solid var(--line)}.assistant-title{display:flex;align-items:center;gap:9px;font-weight:750}.assistant-title .mini-logo{width:28px;height:28px;border-radius:9px;background:#e5efff;display:grid;place-items:center;color:#1768f5}.online{font-size:10px;color:#0ca678}.chat{padding:12px;display:grid;gap:10px;max-height:370px;overflow:auto}.message{max-width:95%;font-size:11px;line-height:1.55;padding:11px;border-radius:12px;background:#eff5ff;border:1px solid #e0ebfb}.message.user{justify-self:end;background:#2879ff;color:#fff;border-color:#2879ff}.message .checks{display:grid;gap:5px;margin:8px 0}.check{color:#18734f}.chat-actions{display:flex;gap:7px;padding:0 12px 13px}.chat-actions button{flex:1}.chat-input{display:flex;gap:7px;padding:10px 12px;border-top:1px solid var(--line)}.chat-input input{min-width:0;flex:1;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fbfdff}.send{width:40px;border:0;border-radius:10px;background:var(--blue);color:#fff}.section-list{display:grid;gap:0}.recent{display:flex;align-items:center;gap:9px;padding:9px 2px;border-bottom:1px solid #e7effa}.recent:last-child{border-bottom:0}.recent .circle{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#e7f1ff;font-size:17px}.recent b{font-size:11px;display:block}.recent small{font-size:10px;color:var(--muted)}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.quick-grid button{border:1px solid var(--line);background:#fbfdff;border-radius:10px;padding:10px 7px;text-align:left;color:#24528d;font-size:10px}.quick-grid button:hover{background:#eaf3ff}.page-title{display:flex;justify-content:space-between;align-items:center;margin:0 0 14px}.page-title h1{font-size:23px;margin:0}.page-title p{margin:3px 0 0;color:var(--muted);font-size:12px}.page{display:none}.page.active{display:grid;gap:14px}.form-row{display:flex;gap:8px;flex-wrap:wrap}.form-row input,.form-row select{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:var(--ink);min-width:0}.form-row input{flex:1}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:11px 8px;border-bottom:1px solid #e7effa}.table th{color:var(--muted);font-weight:600}.tag{border-radius:20px;padding:4px 8px;background:#e5f8ef;color:#0b8a5b;font-size:10px}.tag.warn{background:#fff4dd;color:#a56b00}.alert{padding:12px;border-radius:12px;background:#fff6e7;border:1px solid #ffe5b4;color:#875b0b;font-size:12px}.toast{position:fixed;right:20px;bottom:20px;background:#123d7e;color:white;padding:12px 16px;border-radius:12px;box-shadow:0 8px 30px #123d7e30;z-index:20;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.modal-backdrop{position:fixed;inset:0;background:#17365c55;z-index:30;display:none;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal{width:min(480px,100%);background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 20px 60px #163f7430}.modal h2{margin:0 0 7px}.modal p{color:var(--muted);font-size:13px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.footnote{font-size:10px;color:#7189a8;margin-top:8px}
+@media(min-width:1600px){.content{padding:22px}.layout{grid-template-columns:minmax(0,1fr) 380px}.hero{min-height:210px}.panel{padding:18px}}@media(max-width:1250px){.app{grid-template-columns:190px minmax(0,1fr)}.layout{grid-template-columns:minmax(0,1fr) 310px}.features{grid-template-columns:repeat(2,minmax(0,1fr))}.lower{grid-template-columns:1fr 1fr}.lower>.panel:first-child{grid-column:1/-1}.activity-list{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:980px){.layout{grid-template-columns:1fr}.right{grid-template-columns:1fr 1fr}.right .assistant{grid-row:span 2}.hero-row{grid-template-columns:minmax(0,1fr) 190px}}@media(max-width:700px){.app{display:block}.sidebar{position:sticky;top:0;z-index:10;padding:8px;border-right:0;border-bottom:1px solid var(--line);display:block;overflow:auto}.brand{padding:4px 8px 9px}.brand strong{font-size:18px}.nav{display:flex;gap:5px;overflow-x:auto}.nav button{white-space:nowrap;padding:9px 11px;font-size:12px}.nav button span{font-size:15px;width:auto}.sidebar-note{display:none}.topbar{height:58px;padding:0 12px;gap:8px}.profile{display:none}.content{padding:10px}.hero-row{grid-template-columns:1fr}.hero{min-height:220px}.weather{display:grid;grid-template-columns:1fr 1fr;gap:8px}.weather hr{display:none}.features{grid-template-columns:1fr 1fr}.feature{padding:10px;gap:8px}.feature-icon{width:42px;height:42px;flex-basis:42px;font-size:21px}.twocol,.lower{grid-template-columns:1fr}.lower>.panel:first-child{grid-column:auto}.device-grid{grid-template-columns:1fr 1fr}.right{grid-template-columns:1fr}.right .assistant{grid-row:auto}.energy-content{grid-template-columns:120px minmax(0,1fr)}.donut{width:116px;height:116px}.activity-list{grid-template-columns:1fr 1fr}.page-title h1{font-size:20px}}@media(max-width:390px){.features{grid-template-columns:1fr}.device-grid{grid-template-columns:1fr}.energy-content{grid-template-columns:1fr;justify-items:center}.activity-list{grid-template-columns:1fr}.topbar .search{padding:8px 10px}}
+</style></head>
+<body><div class="app">
+<aside class="sidebar"><div class="brand"><div class="logo">⌂</div><div><strong>MADDY</strong><small>Your Life. Smarter. Together.</small></div></div>
+<nav class="nav" id="nav"><button data-page="tasks"><span>✓</span>My Tasks</button><button class="active" data-page="home"><span>⌂</span>Home</button><button data-page="smart"><span>⌂</span>Smart Home</button><button data-page="energy"><span>◉</span>Energy Monitor</button><button data-page="safety"><span>⬟</span>Safety & Security</button><button data-page="automation"><span>✿</span>Automation</button><button data-page="medicine"><span>✚</span>Medicine & Health</button><button data-page="travel"><span>✈</span>Travel & Tourism</button><button data-page="activity"><span>◷</span>Activity History</button><button data-page="settings"><span>⚙</span>Settings</button></nav>
+<div class="sidebar-note"><div class="house">⌂</div><strong>A smarter home today, a better tomorrow.</strong><small>— MADDY</small></div></aside>
+<main class="main"><header class="topbar"><label class="search"><span>⌕</span><input id="globalSearch" placeholder="Search anything… (e.g. turn off lights, show energy usage)"><span>⌘ K</span></label><div class="top-actions"><button class="iconbtn" id="notifications" title="Notifications">♧</button><div class="profile"><div class="avatar">A</div><div><small>Welcome back,</small><b>Alex</b></div>⌄</div></div></header>
+<div class="content"><div class="layout"><section class="center">
+<div class="page active" id="page-home"><div class="hero-row"><section class="hero"><h1>Good evening, Alex!</h1><p>Your home is secure, comfortable and running efficiently.</p><div class="pills"><div class="pill"><span class="dot" style="color:#0bb98b">⌂</span><span>Home Status<b>Good</b></span></div><div class="pill"><span class="dot" style="color:#19b5a2">◈</span><span>Energy Usage<b>Low</b></span></div><div class="pill"><span class="dot" style="color:#9255ed">⬟</span><span>Security<b>All Clear</b></span></div></div></section><section class="weather"><div class="weather-top"><span class="weather-icon">🌤️</span><div><strong>22°C</strong><p>Partly Cloudy</p><p>Bengaluru, India</p></div></div><hr><div style="font-size:12px;color:var(--muted)">▦ &nbsp;Wed, 21 Oct 2026<br><b style="color:var(--ink);font-size:15px;display:inline-block;margin:5px 0 0 24px" id="clock">7:42 PM</b></div></section></div>
+<div class="features"><button class="feature" data-goto="smart"><div class="feature-icon">⌂</div><div><b>Smart Home</b><small>Control your devices</small></div><span class="arrow">›</span></button><button class="feature" data-goto="energy"><div class="feature-icon">ϟ</div><div><b>Energy Monitor</b><small>Track usage & cost</small></div><span class="arrow">›</span></button><button class="feature" data-goto="medicine"><div class="feature-icon">✚</div><div><b>Medicine</b><small>Reminders & health</small></div><span class="arrow">›</span></button><button class="feature" data-goto="travel"><div class="feature-icon">✈</div><div><b>Travel & Tourism</b><small>Plan your next trip</small></div><span class="arrow">›</span></button></div>
+<div class="twocol"><section class="panel"><div class="panel-head"><h2><span>⌂</span>My Devices <span class="tag" id="deviceCount">6 devices</span></h2><button class="linkbtn" data-goto="smart">View all</button></div><div class="device-grid" id="deviceGrid"></div></section><section class="panel"><div class="panel-head"><h2><span>ϟ</span>Energy Usage</h2><select id="energyPeriod" class="outline" style="padding:5px 8px;font-size:11px"><option>Today</option><option>This week</option><option>This month</option></select></div><div class="energy-content"><div class="donut"><div class="donut-inner"><b id="totalKwh">12.4 <small>kWh</small></b><small>Total Consumption</small></div></div><div><div class="cost">Estimated Cost<strong id="totalCost">₹ 99.20</strong><span class="positive">↓ 18% vs yesterday</span></div><div class="legend"><div class="legend-row"><span class="swatch" style="background:#347dff"></span>AC <small>45% &nbsp; 5.6 kWh</small></div><div class="legend-row"><span class="swatch" style="background:#8c71f6"></span>TV <small>20% &nbsp; 2.5 kWh</small></div><div class="legend-row"><span class="swatch" style="background:#f6b52b"></span>Lights <small>15% &nbsp; 1.9 kWh</small></div><div class="legend-row"><span class="swatch" style="background:#f16c76"></span>Others <small>20% &nbsp; 2.4 kWh</small></div></div></div></div><p class="footnote">Demo estimate · tariff ₹8/kWh</p></section></div>
+<div class="lower"><section class="panel"><div class="panel-head"><h2><span>▥</span>Energy Consumption Trend</h2><div class="range"><button class="active" data-range="7D">7D</button><button data-range="30D">30D</button><button data-range="12M">12M</button></div></div><svg class="chart" id="energyChart" viewBox="0 0 440 165" preserveAspectRatio="none" aria-label="Energy consumption chart"><g stroke="#e2ecfa" stroke-width="1"><path d="M42 20H425 M42 48H425 M42 76H425 M42 104H425 M42 132H425"/><path d="M42 20V132 M106 20V132 M170 20V132 M234 20V132 M298 20V132 M362 20V132 M425 20V132" stroke-dasharray="2 4"/></g><g fill="#6d88ad" font-size="9"><text x="2" y="23">20 kWh</text><text x="2" y="51">15 kWh</text><text x="2" y="79">10 kWh</text><text x="9" y="107">5 kWh</text><text x="9" y="135">0 kWh</text><text x="40" y="153">Oct 15</text><text x="102" y="153">Oct 16</text><text x="166" y="153">Oct 17</text><text x="230" y="153">Oct 18</text><text x="294" y="153">Oct 19</text><text x="358" y="153">Oct 20</text><text x="400" y="153">Today</text></g><path d="M42 91 L106 69 L170 91 L234 82 L298 91 L362 54 L425 86 L425 132 L42 132Z" fill="#2879ff" opacity=".12"/><path d="M42 91 L106 69 L170 91 L234 82 L298 91 L362 54 L425 86" fill="none" stroke="#1768f5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><g fill="#1768f5"><circle cx="42" cy="91" r="3.5"/><circle cx="106" cy="69" r="3.5"/><circle cx="170" cy="91" r="3.5"/><circle cx="234" cy="82" r="3.5"/><circle cx="298" cy="91" r="3.5"/><circle cx="362" cy="54" r="3.5"/><circle cx="425" cy="86" r="3.5"/></g></svg></section>
+<section class="panel"><div class="panel-head"><h2><span>✚</span>Upcoming Medicine</h2><button class="linkbtn" data-goto="medicine">View all</button></div><div class="med-list" id="homeMeds"></div></section>
+<section class="panel"><div class="panel-head"><h2><span>✈</span>Travel Suggestions</h2><button class="linkbtn" data-goto="travel">View all</button></div><div class="trip-img"></div><b style="font-size:12px">Bali, Indonesia</b><div class="rating">★ 4.8 <span class="subtle">(2.4k reviews)</span></div><p class="subtle">7 days · From ₹45,000</p><button class="primary" style="width:100%" data-goto="travel">Explore Packages</button></section></div>
+<section class="panel"><div class="panel-head"><h2><span>ϟ</span>Recent Activity</h2><button class="linkbtn" data-goto="activity">View all</button></div><div class="activity-list" id="activityList"></div></section></div>
+<div class="page" id="page-smart"><div class="page-title"><div><h1>Smart Home</h1><p>Manage your connected devices and check their current state.</p></div><button class="primary" id="allLights">Turn off all lights</button></div><section class="panel"><div class="panel-head"><h2>All devices</h2><span class="subtle">Changes apply to this interactive simulator</span></div><div class="device-grid" id="allDeviceGrid"></div></section><section class="panel"><div class="panel-head"><h2>Device connection</h2><span class="tag">Simulator online</span></div><p class="subtle">Device states are local demo data until connected to a real device API or your team's backend.</p></section></div>
+<div class="page" id="page-energy"><div class="page-title"><div><h1>Energy Monitor</h1><p>Understand consumption and estimate electricity costs.</p></div><button class="outline" id="exportEnergy">Export summary</button></div><div class="twocol"><section class="panel"><div class="panel-head"><h2>Consumption overview</h2><span class="tag">Simulated</span></div><div class="energy-content"><div class="donut"><div class="donut-inner"><b>12.4 <small>kWh</small></b><small>Today</small></div></div><div><div class="cost">Estimated cost<strong id="energyPageCost">₹ 99.20</strong><span class="positive">Based on ₹8/kWh</span></div><p class="subtle">Change the tariff in Settings to update this estimate.</p></div></div></section><section class="panel"><div class="panel-head"><h2>Energy-saving suggestions</h2></div><div class="recent"><span class="circle">❄</span><div><b>Review AC runtime</b><small>AC is the largest estimated energy consumer.</small></div></div><div class="recent"><span class="circle">💡</span><div><b>Switch off unused lights</b><small>Only turn off lights when appropriate.</small></div></div><div class="recent"><span class="circle">ϟ</span><div><b>Check standby devices</b><small>Verify before disconnecting appliances.</small></div></div></section></div><section class="panel"><div class="panel-head"><h2>Daily energy history</h2><span class="subtle">kWh · illustrative sample</span></div><svg class="chart" viewBox="0 0 600 165" preserveAspectRatio="none"><g stroke="#e2ecfa"><path d="M40 25H585 M40 60H585 M40 95H585 M40 130H585"/></g><path d="M40 85 L125 58 L210 88 L295 77 L380 93 L465 43 L550 75 L550 130 L40 130Z" fill="#2879ff" opacity=".12"/><path d="M40 85 L125 58 L210 88 L295 77 L380 93 L465 43 L550 75" fill="none" stroke="#1768f5" stroke-width="3"/><g fill="#6d88ad" font-size="11"><text x="40" y="151">Oct 15</text><text x="125" y="151">Oct 16</text><text x="210" y="151">Oct 17</text><text x="295" y="151">Oct 18</text><text x="380" y="151">Oct 19</text><text x="465" y="151">Oct 20</text><text x="530" y="151">Today</text></g></svg></section></div>
+<div class="page" id="page-safety"><div class="page-title"><div><h1>Safety & Security</h1><p>Review sensor states and simulated home alerts.</p></div><span class="tag" id="securityStatus">All clear</span></div><section class="panel"><div class="panel-head"><h2>Sensor status</h2></div><div id="safetyDevices" class="device-grid"></div></section><section class="panel"><div class="panel-head"><h2>Safety guidance</h2></div><div class="alert">This prototype does not contact emergency services or monitor real sensors. Connect verified hardware before relying on safety alerts.</div><div class="form-row" style="margin-top:12px"><button class="outline" id="simulateDoor">Simulate door opened</button><button class="outline" id="closeDoor">Mark door closed</button></div></section></div>
+<div class="page" id="page-automation"><div class="page-title"><div><h1>Automation & Routines</h1><p>Run sample routines with explicit confirmation for device changes.</p></div></div><div class="features" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))"><button class="feature" data-routine="away"><div class="feature-icon">✈</div><div><b>Away Mode</b><small>Review lights and appliances</small></div></button><button class="feature" data-routine="night"><div class="feature-icon">☾</div><div><b>Good Night</b><small>Prepare a bedtime routine</small></div></button><button class="feature" data-routine="energy"><div class="feature-icon">ϟ</div><div><b>Energy Saver</b><small>Find potential power waste</small></div></button><button class="feature" data-routine="morning"><div class="feature-icon">☀</div><div><b>Good Morning</b><small>Review your home status</small></div></button></div><section class="panel"><div class="panel-head"><h2>Workflow activity</h2></div><div id="workflowLog" class="section-list"><p class="subtle">Choose a routine to preview its steps. Actions remain pending until approved.</p></div></section></div>
+<div class="page" id="page-medicine"><div class="page-title"><div><h1>Medicine & Health</h1><p>Keep track of reminders and mark doses as taken.</p></div><button class="primary" id="addMedicineBtn">＋ Add reminder</button></div><section class="panel"><div class="panel-head"><h2>Medicine schedule</h2><span class="tag">Local demo reminders</span></div><div class="form-row" style="margin-bottom:12px"><input id="medName" placeholder="Medicine name (e.g. Vitamin D)"><input id="medTime" type="time" value="09:00" style="max-width:140px"><select id="medFreq"><option>Daily</option><option>Weekly</option><option>As prescribed</option></select><button class="primary" id="addMedicine">Add reminder</button></div><div id="medicineList"></div><p class="footnote">Reminder tracking only; Maddy does not prescribe medicines or change medical instructions. Follow your clinician's directions.</p></section><section class="panel"><div class="panel-head"><h2>Wellness notes</h2></div><div class="form-row"><input id="healthNote" placeholder="Add a note for your next appointment"><button class="outline" id="saveNote">Save note</button></div><div id="notesList" class="section-list" style="margin-top:8px"></div></section></div>
+<div class="page" id="page-travel"><div class="page-title"><div><h1>Travel & Tourism</h1><p>Explore destinations that fit your budget and travel style.</p></div></div><section class="panel"><div class="panel-head"><h2>Plan your trip</h2><span class="tag">Illustrative recommendations</span></div><div class="form-row"><input id="destination" placeholder="Destination or leave blank for ideas"><input id="budget" type="number" min="0" value="45000" placeholder="Budget ₹"><select id="tripDays"><option value="3">3 days</option><option value="5">5 days</option><option value="7" selected>7 days</option><option value="10">10 days</option><option value="14">14 days</option></select><select id="travelStyle"><option>Relaxed</option><option>Adventure</option><option>Culture & heritage</option><option>Family friendly</option><option>Nature</option></select><button class="primary" id="planTrip">Find trips</button></div><div id="tripResults" class="features" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:14px"></div><p class="footnote">Prices are indicative examples, not live offers. Confirm visa rules, transport, accommodation and current prices before booking.</p></section><section class="panel"><div class="panel-head"><h2>Trip checklist</h2></div><div id="tripChecklist" class="section-list"></div></section></div>
+<div class="page" id="page-tasks">
+  <div class="page-title">
+    <div>
+      <h1>My Tasks</h1>
+      <p>Tasks synchronized with MADDY's backend database.</p>
+    </div>
+    <button class="outline" id="refreshTasks">↻ Refresh</button>
+  </div>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>➕ Create a task</h2>
+      <span class="tag" id="taskConnectionStatus">Connecting…</span>
+    </div>
+
+
+<form id="taskForm" class="form-row">
+  <input id="taskTitle" placeholder="Task title" required maxlength="200">
+  <input id="taskDescription" placeholder="Description (optional)" maxlength="2000">
+  <select id="taskPriority">
+    <option value="low">Low priority</option>
+    <option value="medium">Medium priority</option>
+    <option value="high" selected>High priority</option>
+  </select>
+  <button class="primary" type="submit">＋ Add Task</button>
+</form>
+
+
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Task list</h2>
+      <span class="subtle" id="taskCount">Loading…</span>
+    </div>
+    <div id="taskList" aria-live="polite">
+      <p class="subtle">Loading tasks from the backend…</p>
+    </div>
+    <p class="footnote">Tasks are stored in MADDY's backend database.</p>
+  </section>
+</div>
+<div class="page" id="page-activity"><div class="page-title"><div><h1>Activity History</h1><p>Recent assistant and device events from this session.</p></div><button class="outline" id="clearActivity">Clear history</button></div><section class="panel"><div class="panel-head"><h2>All activity</h2><span class="subtle" id="activityCount"></span></div><div id="fullActivity"></div></section></div>
+<div class="page" id="page-settings"><div class="page-title"><div><h1>Settings</h1><p>Configure your demo experience.</p></div></div><section class="panel"><div class="panel-head"><h2>Energy tariff</h2></div><div class="form-row"><label style="align-self:center">Electricity tariff (₹/kWh)</label><input id="tariff" type="number" min="0" step="0.1" value="8" style="max-width:150px"><button class="primary" id="saveTariff">Save tariff</button></div></section><section class="panel"><div class="panel-head"><h2>Integration status</h2></div><div class="recent"><span class="circle">⌂</span><div><b>Device simulator</b><small>Active · Local demo state</small></div><span class="tag">Ready</span></div><div class="recent"><span class="circle">✧</span><div><b>AI backend / MCP</b><small>Backend status shown in the MADDY Assistant panel</small></div><span class="tag warn">Pending</span></div><div class="recent"><span class="circle">🎙</span><div><b>Voice input</b><small id="voiceStatus">Checking browser support…</small></div><button class="outline" id="voiceTest">Test mic</button></div></section></div>
+</section><aside class="right"><section class="panel assistant"><div class="assistant-head"><div class="assistant-title"><span class="mini-logo">⌂</span>MADDY Assistant</div><span class="online" id="backendStatus">● Checking backend…</span></div><div class="chat" id="chat" aria-live="polite"></div><div class="chat-actions"><button class="primary" id="approveHome">Yes, proceed</button><button class="outline" id="showDetails">Show details</button></div><div class="chat-input"><input id="chatInput" placeholder="Ask MADDY anything…"><button class="send" id="sendChat" aria-label="Send message">➤</button></div></section><section class="panel"><div class="panel-head"><h2>♧ Recent Conversations</h2><button class="linkbtn" id="viewChats">View all</button></div><div class="section-list" id="recentChats"><div class="recent"><span class="circle">❄</span><div><b>Prepare my home for when I leave</b><small>Today, just now</small></div></div><div class="recent"><span class="circle">✈</span><div><b>Best places to visit in Bali</b><small>Today, 6:15 PM</small></div></div><div class="recent"><span class="circle">✚</span><div><b>Show my medicine schedule</b><small>Today, 4:32 PM</small></div></div><div class="recent"><span class="circle">💡</span><div><b>Turn off the living room light</b><small>Today, 2:18 PM</small></div></div><div class="recent"><span class="circle">ϟ</span><div><b>Show energy consumption</b><small>Today, 11:03 AM</small></div></div></div></section><section class="panel"><div class="panel-head"><h2>Quick Actions</h2><button class="linkbtn" data-goto="automation">View</button></div><div class="quick-grid"><button data-action="lights">💡 &nbsp;Turn off all lights</button><button data-action="away">✈ &nbsp;Enable Away Mode</button><button data-action="door">⬟ &nbsp;Check door status</button><button data-action="energy">▥ &nbsp;View energy report</button><button data-action="medicine">✚ &nbsp;Medicine schedule</button><button data-action="travel">✈ &nbsp;Plan a trip</button></div></section></aside></div></div></main></div>
+<div class="modal-backdrop" id="modal"><div class="modal"><h2 id="modalTitle">Confirm action</h2><p id="modalText">Review the action before continuing.</p><div class="modal-actions"><button class="outline" id="cancelModal">Cancel</button><button class="primary" id="confirmModal">Approve action</button></div></div></div><div class="toast" id="toast" role="status"></div>
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+const devices = [
+  { id: 'living', name: 'Living Room Light', icon: '💡', on: true, power: 12, type: 'light' },
+  { id: 'kitchen', name: 'Kitchen Light', icon: '♧', on: false, power: 10, type: 'light' },
+  { id: 'ac', name: 'Air Conditioner', icon: '❄', on: true, power: 1200, type: 'ac', temp: 24 },
+  { id: 'tv', name: 'Television', icon: '▣', on: true, power: 100, type: 'tv' },
+  { id: 'plug', name: 'Smart Plug', icon: '🔌', on: true, power: 60, type: 'plug' },
+  { id: 'door', name: 'Door Sensor', icon: '▣', on: false, power: 1, type: 'door', open: false }
+];
+
+let tariff = 8;
+
+let activities = [
+  { icon: '💡', title: 'Light turned off', detail: 'Living Room · 7:32 PM' },
+  { icon: '❄', title: 'AC temperature changed', detail: '24°C · 6:45 PM' },
+  { icon: '▤', title: 'Energy report generated', detail: 'Daily summary · 5:20 PM' },
+  { icon: '▣', title: 'Door closed', detail: 'Front Door · 4:12 PM' },
+  { icon: '▣', title: 'TV turned on', detail: 'Living Room · 3:45 PM' }
+];
+
+let medicines = [
+  { id: 1, name: 'Vitamin D', time: '09:00', freq: 'Daily', taken: false },
+  { id: 2, name: 'Blood Pressure Tablet', time: '21:00', freq: 'Daily', taken: false },
+  { id: 3, name: 'Omega 3', time: '09:00', freq: 'Daily', taken: false }
+];
+
+let notes = [];
+let pendingAction = null;
+
+
+// Show notification
+function toast(message) {
+  const t = $('#toast');
+  if (!t) return;
+
+  t.textContent = message;
+  t.classList.add('show');
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(() => {
+    t.classList.remove('show');
+  }, 2600);
+}
+
+
+// Navigate between dashboard pages
+function go(page) {
+  $$('.page').forEach(p => {
+    p.classList.toggle('active', p.id === 'page-' + page);
+  });
+
+  $$('.nav button').forEach(b => {
+    b.classList.toggle('active', b.dataset.page === page);
+  });
+
+  if (page === 'activity') renderActivity();
+  if (page === 'medicine') renderMeds();
+  if (page === 'safety') renderSafety();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+// Record an activity
+function log(icon, title, detail) {
+  activities.unshift({
+    icon,
+    title,
+    detail: detail || 'Just now'
+  });
+
+  activities = activities.slice(0, 30);
+
+  renderActivity();
+  renderHomeActivity();
+}
+
+
+// Generate a smart-device card
+function deviceCard(d) {
+  const status =
+    d.type === 'door'
+      ? (d.open ? 'Open' : 'Closed')
+      : d.on
+        ? (d.type === 'ac'
+            ? `${d.temp}°C · ${d.power} W`
+            : `On · ${d.power} W`)
+        : `Off · ${d.power} W`;
+
+  return `
+    <div class="device">
+      <div class="device-top">
+        <div class="device-icon">${d.icon}</div>
+
+        <div style="min-width:0">
+          <div class="device-name" title="${esc(d.name)}">
+            ${esc(d.name)}
+          </div>
+
+          <div class="device-meta">${status}</div>
+        </div>
+      </div>
+
+      <div class="device-bottom">
+        <span class="subtle">
+          ${d.type === 'door' ? 'Sensor status' : 'Power state'}
+        </span>
+
+        <button
+          class="switch ${
+            d.type === 'door'
+              ? (d.open ? '' : 'door')
+              : (d.on ? 'on' : '')
+          }"
+          data-device="${d.id}"
+          aria-label="${
+            d.type === 'door'
+              ? 'Simulate door state'
+              : 'Toggle ' + esc(d.name)
+          }"
+          aria-pressed="${d.type === 'door' ? d.open : d.on}"
+        >
+          <i></i>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+document.addEventListener('click', function (event) {
+    const button = event.target.closest('.switch');
+    if (!button) return;
+
+    const deviceId = button.dataset.device;
+    if (!deviceId) return;
+
+    toggleDevice(deviceId);
+});
+
+async function renderDevices() {
+    const container = document.getElementById('deviceGrid');
+    if (!container) return;
+
+    try {
+        const response = await fetch(`${API_URL}/api/smart-home/devices`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const result = await response.json();
+        const backendDevices = result.devices || [];
+
+        // Match existing dashboard cards to backend devices.
+        const deviceMap = {
+            living: 'living_room_light',
+            ac: 'living_room_thermostat'
+        };
+
+        devices.forEach(d => {
+            const backendId = deviceMap[d.id];
+            const backend = backendDevices.find(
+                x => x.device_id === backendId
+            );
+
+            if (backend) {
+                d.backendId = backend.device_id;
+                d.on = backend.is_on;
+
+                if (backend.brightness != null) {
+                    d.brightness = backend.brightness;
+                }
+
+                if (backend.temperature != null) {
+                    d.temp = backend.temperature;
+                }
+            } else {
+                delete d.backendId;
+            }
+        });
+
+        container.innerHTML = devices
+            .map(device => deviceCard(device))
+            .join('');
+
+        const count = document.getElementById('deviceCount');
+        if (count) count.textContent = devices.length;
+
+    } catch (error) {
+        console.error('Failed to load smart-home devices:', error);
+        container.innerHTML = devices
+            .map(device => deviceCard(device))
+            .join('');
+    }
+}
+
+
+// Toggle a device
+async function toggleDevice(id, force) {
+    const d = devices.find(x => x.id === id);
+    if (!d) return;
+
+    const previousState = d.type === 'door' ? d.open : d.on;
+    const newState = force === undefined ? !previousState : !!force;
+
+    // Door sensor is local-only in this prototype.
+    if (d.type === 'door') {
+        d.open = newState;
+        log('▣', `Front door ${d.open ? 'opened' : 'closed'}`, 'Door sensor · Just now');
+        renderDevices();
+        renderSafety();
+        return;
+    }
+
+    // Send supported devices to the backend.
+    if (d.backendId) {
+        try {
+            const response = await fetch(
+                `${API_URL}/api/smart-home/devices/${encodeURIComponent(d.backendId)}/control`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: newState ? 'on' : 'off' })
+                }
+            );
+
+            const result = await response.json();
+            if (!response.ok) {
+                throw new Error(result.detail || `HTTP ${response.status}`);
+            }
+
+            d.on = !!result.device.is_on;
+        } catch (error) {
+            console.error('Device control failed:', error);
+            toast(`Could not control ${d.name}: ${error.message}`);
+            await renderDevices();
+            return;
+        }
+    } else {
+        // Devices not registered with the backend remain local-only.
+        d.on = newState;
+    }
+
+    log(d.icon, `${d.name} ${d.on ? 'turned on' : 'turned off'}`,
+        `Power ${d.on ? d.power : 0} W · Just now`);
+
+    renderDevices();
+    renderCosts();
+    renderSafety();
+    toast(`${d.name}: ${d.on ? 'on' : 'off'}`);
+}
+
+
+// Calculate energy usage and cost
+function renderCosts() {
+  const watts = devices.reduce(
+    (sum, d) => sum + (d.type !== 'door' && d.on ? d.power : 0),
+    0
+  );
+
+  const kwh = 12.4;
+
+  const totalKwh = $('#totalKwh');
+  if (totalKwh) {
+    totalKwh.innerHTML = kwh.toFixed(1) + ' <small>kWh</small>';
+  }
+
+  const totalCost = $('#totalCost');
+  if (totalCost) {
+    totalCost.textContent = '₹ ' + (kwh * tariff).toFixed(2);
+  }
+
+  const energyPageCost = $('#energyPageCost');
+  if (energyPageCost) {
+    energyPageCost.textContent = '₹ ' + (kwh * tariff).toFixed(2);
+  }
+
+  const homeStatus = $$('.pills .pill b');
+
+  if (homeStatus[1]) {
+    homeStatus[1].textContent = watts > 1000 ? 'Moderate' : 'Low';
+  }
+}
+
+
+// Render recent activity on the home page
+function renderHomeActivity() {
+  const activityList = $('#activityList');
+  if (!activityList) return;
+
+  activityList.innerHTML = activities
+    .slice(0, 5)
+    .map(x => `
+      <div class="activity">
+        <span class="bubble">${x.icon}</span>
+
+        <div>
+          <b>${esc(x.title)}</b>
+          <small>${esc(x.detail)}</small>
+        </div>
+      </div>
+    `)
+    .join('');
+}
+
+
+// Render the complete activity history
+function renderActivity() {
+  const fullActivity = $('#fullActivity');
+  if (!fullActivity) return;
+
+  const activityCount = $('#activityCount');
+
+  if (activityCount) {
+    activityCount.textContent = activities.length + ' events';
+  }
+
+  fullActivity.innerHTML = activities.length
+    ? `
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Details</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${activities.map(a => `
+            <tr>
+              <td>${a.icon} ${esc(a.title)}</td>
+              <td>${esc(a.detail)}</td>
+              <td><span class="tag">Recorded</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `
+    : '<p class="subtle">No activity yet.</p>';
+}
+
+
+// Render medicine reminders
+function renderMeds() {
+  const list = $('#medicineList');
+  if (!list) return;
+
+  list.innerHTML = medicines.length
+    ? `
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Medicine</th>
+            <th>Time</th>
+            <th>Frequency</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${medicines.map(m => `
+            <tr>
+              <td>💊 ${esc(m.name)}</td>
+              <td>${esc(m.time)}</td>
+              <td>${esc(m.freq)}</td>
+
+              <td>
+                <span class="tag ${m.taken ? '' : 'warn'}">
+                  ${m.taken ? 'Taken' : 'Upcoming'}
+                </span>
+              </td>
+
+              <td>
+                <button
+                  class="${m.taken ? 'outline' : 'primary'}"
+                  style="padding:6px 9px"
+                  data-med="${m.id}"
+                >
+                  ${m.taken ? 'Undo' : 'Mark taken'}
+                </button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `
+    : '<p class="subtle">No reminders yet. Add your first medicine reminder above.</p>';
+
+  $$('[data-med]').forEach(button => {
+    button.onclick = () => {
+      const m = medicines.find(x => x.id == button.dataset.med);
+      if (!m) return;
+
+      m.taken = !m.taken;
+
+      log(
+        '✚',
+        `${m.name}: ${m.taken ? 'marked taken' : 'marked upcoming'}`,
+        `${m.time} · Just now`
+      );
+
+      renderMeds();
+      renderHomeMeds();
+
+      toast(
+        m.taken
+          ? 'Reminder marked as taken'
+          : 'Reminder reset'
+      );
+    };
+  });
+}
+
+
+// Render medicine reminders on the home page
+function renderHomeMeds() {
+  const homeMeds = $('#homeMeds');
+  if (!homeMeds) return;
+
+  homeMeds.innerHTML = medicines
+    .slice(0, 3)
+    .map(m => `
+      <div class="med-item">
+        <span class="med-icon">💊</span>
+
+        <div style="flex:1">
+          <b>${esc(m.name)}</b>
+          <small>${m.taken ? 'Taken' : `Today · ${esc(m.time)}`}</small>
+        </div>
+
+        ${m.taken ? '<span class="tag">Done</span>' : ''}
+      </div>
+    `)
+    .join('');
+}
+
+
+// Update the safety status
+function renderSafety() {
+  const d = devices.find(x => x.id === 'door');
+  const status = $('#securityStatus');
+
+  if (!d || !status) return;
+
+  status.textContent = d.open ? 'Door open' : 'All clear';
+  status.className = 'tag' + (d.open ? ' warn' : '');
+}
+
+
+// Escape HTML to prevent accidental HTML injection
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[c]));
+}
+// MADDY backend integration. Override this in the browser console if needed:
+// window.MADDY_API_URL = "http://127.0.0.1:8000";
+const API_URL = (window.MADDY_API_URL || "http://127.0.0.1:8000").replace(/\/$/, "");
+const CONVERSATION_KEY = "maddy_conversation_id";
+const CHAT_KEY = "maddy_chat_messages";
+let conversationId = localStorage.getItem(CONVERSATION_KEY);
+if (!conversationId) {
+  conversationId = (crypto.randomUUID ? crypto.randomUUID() : "maddy-" + Date.now() + "-" + Math.random().toString(16).slice(2));
+  localStorage.setItem(CONVERSATION_KEY, conversationId);
+}
+let chatMessages = [];
+function persistChat() {
+  try { localStorage.setItem(CHAT_KEY, JSON.stringify(chatMessages.slice(-40))); } catch (e) {}
+}
+function addMessage(text, who='bot') {
+  const cleanText = String(text ?? "");
+  const div = document.createElement('div');
+  div.className = 'message ' + (who === 'user' ? 'user' : '');
+  div.textContent = cleanText;
+  $('#chat').appendChild(div);
+  $('#chat').scrollTop = $('#chat').scrollHeight;
+  chatMessages.push({ role: who === 'user' ? 'user' : 'assistant', content: cleanText, at: new Date().toISOString() });
+  persistChat();
+}
+function restoreChat() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CHAT_KEY) || "[]");
+    if (Array.isArray(saved)) {
+      chatMessages = saved.filter(m => m && typeof m.content === "string" && ["user","assistant"].includes(m.role)).slice(-40);
+    }
+  } catch (e) { chatMessages = []; }
+  $('#chat').innerHTML = "";
+  if (chatMessages.length) {
+    chatMessages.forEach(m => {
+      const div = document.createElement("div");
+      div.className = "message " + (m.role === "user" ? "user" : "");
+      div.textContent = m.content;
+      $('#chat').appendChild(div);
+    });
+    $('#chat').scrollTop = $('#chat').scrollHeight;
+  } else {
+    addMessage("Hi! I'm MADDY, your AI assistant. Connect me to your backend and ask me anything.");
+  }
+}
+async function checkBackend() {
+  const status = $('#backendStatus');
+  try {
+    const response = await fetch(`${API_URL}/health`, { method: "GET" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    status.textContent = `● ${data.status === "healthy" ? "Backend connected" : "Backend responded"}`;
+    status.style.color = "#0ca678";
+  } catch (error) {
+    status.textContent = "● Backend offline";
+    status.style.color = "#ef6262";
+    console.warn("MADDY backend health check failed:", error);
+  }
+}
+async function ask(text) {
+  const message = String(text || "").trim();
+
+  if (!message || window.maddySending) return;
+
+  window.maddySending = true;
+  $("#chatInput").value = "";
+
+  addMessage(message, "user");
+
+  const sendButton = $("#sendChat");
+  sendButton.disabled = true;
+  sendButton.textContent = "…";
+
+  let pending = null;
+
+  try {
+    pending = document.createElement("div");
+    pending.className = "message";
+    pending.textContent = "MADDY is thinking…";
+    pending.id = "maddyThinking";
+
+    $("#chat").appendChild(pending);
+    $("#chat").scrollTop = $("#chat").scrollHeight;
+
+    const response = await fetch(`${API_URL}/api/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message,
+        conversation_id: conversationId
+      })
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        `${data.error_type ? `[${data.error_type}] ` : ""}${data.detail || `Backend request failed (${response.status})`}`
+      );
+    }
+
+    if (
+      data.conversation_id &&
+      data.conversation_id !== conversationId
+    ) {
+      conversationId = data.conversation_id;
+      localStorage.setItem(CONVERSATION_KEY, conversationId);
+    }
+
+    // Display MADDY's response.
+    const answer =
+      data.answer ||
+      data.reply ||
+      "I received an empty response from the backend.";
+
+    addMessage(answer);
+
+    // Speak MADDY's response aloud.
+    if ("speechSynthesis" in window && answer) {
+      window.speechSynthesis.cancel();
+
+      const spokenAnswer = answer
+        .replace(/```[\s\S]*?```/g, "Code omitted.")
+        .replace(/https?:\/\/\S+/g, "link")
+        .replace(/[#*_`]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      const utterance = new SpeechSynthesisUtterance(spokenAnswer);
+      utterance.lang = "en-IN";
+      utterance.rate = 1;
+      utterance.pitch = 1;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    
+    // Refresh dashboard data after MADDY executes commands.
+    try {
+        await renderDevices();
+
+        if (typeof loadTasks === "function") {
+           await loadTasks();
+        }
+
+        if (typeof renderCosts === "function") {
+           renderCosts();
+        }
+
+        if (typeof renderSafety === "function") {
+            renderSafety();
+        }
+    } catch (syncError) {
+        console.error("Dashboard synchronization failed:", syncError);
+    }
+
+
+    
+    
+  
+
+
+    // Display the actual tool results returned by MADDY.
+    if (Array.isArray(data.tool_calls) && data.tool_calls.length) {
+      data.tool_calls.forEach(t => {
+        const name = t.name || t.tool_name || "tool";
+        if (t.success === false) {
+          addMessage(`Tool ${name} failed: ${t.error || "Unknown error"}`);
+          return;
+        }
+
+        const result = t.result;
+        const details = result === undefined
+          ? "completed without a result"
+          : JSON.stringify(result);
+        addMessage(`Tool ${name} succeeded: ${details}`);
+      });
+    }
+
+  } catch (error) {
+    const isNetworkError = error instanceof TypeError && error.message === "Failed to fetch";
+    addMessage(
+      isNetworkError
+        ? `MADDY could not reach the backend at ${API_URL}. Check that the backend is running and that this page's origin is allowed by CORS.`
+        : `MADDY request failed: ${error.message}`
+    );
+
+    console.error("MADDY chat error:", error);
+
+  } finally {
+    if (pending) pending.remove();
+
+    window.maddySending = false;
+    sendButton.disabled = false;
+    sendButton.textContent = "➤";
+  }
+}
+
+// ===== MADDY LIVE TASK MANAGEMENT =====
+
+async function loadTasks() {
+const list = $('#taskList');
+const status = $('#taskConnectionStatus');
+
+list.innerHTML = '<p class="subtle">Loading tasks…</p>';
+
+try {
+const response = await fetch(`${API_URL}/api/tasks`);
+
+
+if (!response.ok) {
+  throw new Error(`HTTP ${response.status}`);
+}
+
+const data = await response.json();
+const tasks = Array.isArray(data) ? data : data.tasks;
+
+if (!Array.isArray(tasks)) {
+  throw new Error('Unexpected task response format');
+}
+
+status.textContent = 'Backend connected';
+status.className = 'tag';
+
+const completed = tasks.filter(t => Boolean(t.completed)).length;
+$('#taskCount').textContent =
+  `${tasks.length} tasks · ${completed} completed`;
+
+if (!tasks.length) {
+  list.innerHTML = '<p class="subtle">No tasks yet. Create your first task above.</p>';
+  return;
+}
+
+list.innerHTML = `
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${tasks.map(task => `
+        <tr>
+          <td>
+            <b>${esc(task.title)}</b>
+            <br>
+            <small class="subtle">${esc(task.description || '')}</small>
+          </td>
+          <td>${esc(task.priority || 'medium')}</td>
+          <td>
+            <span class="tag ${task.completed ? '' : 'warn'}">
+              ${task.completed ? 'Completed' : 'Pending'}
+            </span>
+          </td>
+          <td>
+            ${task.completed
+              ? '<span class="subtle">Done</span>'
+              : `<button class="outline" data-complete-task="${Number(task.id)}">✓ Complete</button>`
+            }
+          </td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+`;
+
+list.querySelectorAll('[data-complete-task]').forEach(button => {
+  button.addEventListener('click', async () => {
+    await completeTask(Number(button.dataset.completeTask));
+  });
+});
+
+
+} catch (error) {
+status.textContent = 'Connection error';
+status.className = 'tag warn';
+list.innerHTML = `       <div class="alert">
+        Could not load tasks: ${esc(error.message)}.
+        Check that the FastAPI backend is running.       </div>
+    `;
+console.error('MADDY task loading failed:', error);
+}
+}
+
+$('#taskForm').addEventListener('submit', async event => {
+event.preventDefault();
+
+const title = $('#taskTitle').value.trim();
+const description = $('#taskDescription').value.trim();
+const priority = $('#taskPriority').value;
+
+if (!title) {
+toast('Enter a task title');
+return;
+}
+
+const submitButton = event.submitter;
+if (submitButton) submitButton.disabled = true;
+
+try {
+const response = await fetch(`${API_URL}/api/tasks`, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ title, description, priority })
+});
+
+
+const data = await response.json().catch(() => ({}));
+
+if (!response.ok) {
+  throw new Error(data.detail || `HTTP ${response.status}`);
+}
+
+$('#taskTitle').value = '';
+$('#taskDescription').value = '';
+
+log('✓', 'Task created', title);
+toast('Task saved to MADDY');
+
+await loadTasks();
+
+
+} catch (error) {
+toast('Task creation failed: ' + error.message);
+console.error('MADDY task creation failed:', error);
+} finally {
+if (submitButton) submitButton.disabled = false;
+}
+});
+
+async function completeTask(taskId) {
+try {
+const response = await fetch(
+`${API_URL}/api/tasks/${taskId}/complete`,
+{ method: 'POST' }
+);
+
+
+const data = await response.json().catch(() => ({}));
+
+if (!response.ok) {
+  throw new Error(data.detail || `HTTP ${response.status}`);
+}
+
+log('✓', 'Task completed', `Task ID ${taskId}`);
+toast('Task marked complete');
+
+await loadTasks();
+
+
+} catch (error) {
+toast('Could not complete task: ' + error.message);
+console.error('MADDY task completion failed:', error);
+}
+}
+
+$('#refreshTasks').addEventListener('click', loadTasks);
+
+function openModal(title,text,action){pendingAction=action||null;$('#modalTitle').textContent=title;$('#modalText').textContent=text;$('#modal').classList.add('open')}
+function closeModal(){$('#modal').classList.remove('open');pendingAction=null}
+async function executeAway(){
+  await ask('Turn off all registered lights');
+}
+
+async function turnOffAllLights(){
+  await ask('Turn off all registered lights');
+}
+function renderTrips(filter=''){let budget=Number($('#budget')?.value||45000),days=Number($('#tripDays')?.value||7),style=$('#travelStyle')?.value||'Relaxed';let places=[{name:'Bali, Indonesia',cost:45000,desc:'Temples, beaches and scenic landscapes',icon:'🌴'},{name:'Jaipur, India',cost:12000,desc:'Palaces, forts and local food',icon:'🏰'},{name:'Kerala, India',cost:18000,desc:'Backwaters, hills and nature',icon:'🌿'},{name:'Goa, India',cost:15000,desc:'Coastline, cafés and relaxed days',icon:'🏖️'},{name:'Rishikesh, India',cost:9000,desc:'River views, yoga and adventure',icon:'🏞️'},{name:'Singapore',cost:65000,desc:'City attractions and gardens',icon:'🌆'}];let match=places.filter(p=>(!filter||p.name.toLowerCase().includes(filter.toLowerCase()))&&p.cost<=budget);if(filter&&!match.length)match=places.filter(p=>p.cost<=budget).slice(0,3);$('#tripResults').innerHTML=match.length?match.slice(0,4).map(p=>`<article class="panel" style="padding:13px"><div style="font-size:28px;background:#eaf2ff;border-radius:12px;padding:12px;margin-bottom:9px">${p.icon}</div><b>${p.name}</b><p class="subtle">${p.desc}</p><p class="subtle">${days} days · ${style}</p><strong style="font-size:18px;color:#1454ae">From ₹${Math.round(p.cost*days/7).toLocaleString('en-IN')}</strong><button class="outline" style="width:100%;margin-top:10px" data-trip="${esc(p.name)}">View itinerary</button></article>`).join(''):'<div class="alert">No sample destination fits this budget. Try increasing the budget or changing the destination.</div>';$$('[data-trip]').forEach(b=>b.onclick=()=>{let n=b.dataset.trip;openModal(n+' · sample itinerary',`${days}-day ${style.toLowerCase()} trip to ${n}. This demo itinerary can include travel, accommodation, meals and attractions; prices are illustrative and must be checked before booking.`)});$('#tripChecklist').innerHTML=['Confirm travel dates and transport','Check identification, visa and entry requirements','Confirm accommodation and cancellation terms','Save emergency contacts and essential medicines'].map(x=>`<div class="recent"><span class="circle">☐</span><div><b>${x}</b><small>Remember to verify before departure</small></div></div>`).join('')}
+// navigation and interactions
+$('#nav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b)go(b.dataset.page)});document.addEventListener('click',e=>{let b=e.target.closest('[data-goto]');if(b)go(b.dataset.goto)});
+$$('[data-action]').forEach(b=>b.onclick=()=>{let a=b.dataset.action;if(a==='lights')openModal('Turn off all registered lights?','MADDY will check the backend inventory and turn off its registered simulated lights.',turnOffAllLights);else if(a==='away')openModal('Prepare registered lights for away mode?','After approval, MADDY will turn off registered simulated lights through the backend.',executeAway);else if(a==='door')ask('Check door status');else if(a==='energy')go('energy');else if(a==='medicine')go('medicine');else if(a==='travel')go('travel')});
+$$('[data-routine]').forEach(b=>b.onclick=()=>{let r=b.dataset.routine;openModal('Run '+b.querySelector('b').textContent+'?','MADDY will show a simulated routine plan. No device changes happen before approval.',()=>{if(r==='away'||r==='night')executeAway();else{log('✧',b.querySelector('b').textContent+' reviewed','Routine · Just now');$('#workflowLog').innerHTML='<div class="recent"><span class="circle">✓</span><div><b>Device status checked</b><small>Simulator response received</small></div></div><div class="recent"><span class="circle">✓</span><div><b>Recommendations prepared</b><small>Review before taking action</small></div></div><div class="recent"><span class="circle">!</span><div><b>Waiting for approval</b><small>No actions executed</small></div></div>';toast('Routine prepared for review')}})});
+$('#approveHome').onclick=()=>openModal('Approve home preparation?','Turn off currently-on lights, TV and smart plug in the simulator. AC remains on; the door sensor is read-only.',executeAway);$('#showDetails').onclick=()=>addMessage('Current simulated status: Living Room Light '+(devices[0].on?'on':'off')+'; Kitchen Light '+(devices[1].on?'on':'off')+'; AC '+(devices[2].on?'on at '+devices[2].temp+'°C':'off')+'; TV '+(devices[3].on?'on':'off')+'; Smart Plug '+(devices[4].on?'on':'off')+'; Front Door '+(devices[5].open?'open':'closed')+'.');$('#sendChat').onclick=()=>ask($('#chatInput').value);$('#chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')ask($('#chatInput').value)});$('#globalSearch').addEventListener('keydown',e=>{if(e.key==='Enter'){let v=e.target.value;ask(v);e.target.value=''}});$('#notifications').onclick=()=>toast('You are all caught up.');$('#viewChats').onclick=()=>{const saved=chatMessages.length;toast(saved+' messages in this browser conversation');};
+
+$('#cancelModal').onclick=closeModal;$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});$('#confirmModal').onclick=()=>{let fn=pendingAction;closeModal();if(fn)fn();else toast('Action confirmed')};
+$('#allLights').onclick=()=>openModal('Turn off all lights?','Turn off all lights currently switched on in the simulator.',turnOffAllLights);$('#simulateDoor').onclick=()=>toggleDevice('door',true);$('#closeDoor').onclick=()=>toggleDevice('door',false);
+$('#addMedicine').onclick=()=>{let name=$('#medName').value.trim(),time=$('#medTime').value,freq=$('#medFreq').value;if(!name){toast('Enter a medicine reminder name');$('#medName').focus();return}medicines.push({id:Date.now(),name,time,freq,taken:false});$('#medName').value='';renderMeds();renderHomeMeds();log('✚','Medicine reminder added',`${name} · ${time}`);toast('Reminder added')};$('#addMedicineBtn').onclick=()=>{$('#medName').focus();window.scrollTo({top:0,behavior:'smooth'})};$('#saveNote').onclick=()=>{let n=$('#healthNote').value.trim();if(!n)return toast('Write a note first');notes.push(n);$('#notesList').innerHTML=notes.map(x=>`<div class="recent"><span class="circle">✎</span><div><b>${esc(x)}</b><small>Saved locally in this session</small></div></div>`).join('');$('#healthNote').value='';toast('Note saved')};$('#planTrip').onclick=()=>renderTrips($('#destination').value.trim());$('#saveTariff').onclick=()=>{let v=Number($('#tariff').value);if(!Number.isFinite(v)||v<0)return toast('Enter a valid non-negative tariff');tariff=v;renderCosts();toast('Tariff updated')};$('#exportEnergy').onclick=()=>{let text=`MADDY energy summary\nConsumption: 12.4 kWh\nTariff: ₹${tariff}/kWh\nEstimated cost: ₹${(12.4*tariff).toFixed(2)}\nSource: simulated demo data`;let blob=new Blob([text],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='maddy-energy-summary.txt';a.click();URL.revokeObjectURL(a.href);toast('Energy summary exported')};$('#clearActivity').onclick=()=>{activities=[];renderActivity();renderHomeActivity();toast('Activity history cleared')};
+$$('[data-range]').forEach(b=>b.onclick=()=>{$$('[data-range]').forEach(x=>x.classList.toggle('active',x===b));toast('Chart range changed to '+b.dataset.range+' (sample data)')});$('#energyPeriod').onchange=e=>toast('Showing sample energy view: '+e.target.value);
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;$('#voiceStatus').textContent=SR?'Available in this browser':'Not supported here; use text input';$('#voiceTest').onclick=()=>{if(!SR)return toast('Voice input is not supported in this browser. Try Chrome or use chat text.');let rec=new SR();rec.lang='en-IN';rec.onresult=e=>{let v=e.results[0][0].transcript;$('#chatInput').value=v;ask(v)};rec.onerror=()=>toast('Microphone unavailable or permission denied');rec.start();toast('Listening… speak your request')};
+renderDevices();
+renderCosts();
+renderHomeActivity();
+renderMeds();
+renderHomeMeds();
+renderTrips();
+renderSafety();
+renderActivity();
+restoreChat();
+checkBackend();
+loadTasks();
+
+function tick() {
+  let d = new Date();
+  $('#clock').textContent = d.toLocaleTimeString('en-IN', {
+    hour: 'numeric',
+    minute: '2-digit'
+  });
+}
+
+tick();
+setInterval(tick, 30000);
+</script></body></html>
