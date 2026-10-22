@@ -1,0 +1,30 @@
+[project]
+name = "maddy-backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "25mc3054-maker", email = "25mc3054@rgipt.ac.in" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "boto3>=1.43.115",
+    "fastapi>=0.153.0",
+    "mcp[cli]>=2.3.0",
+    "pydantic>=2.14.1",
+    "python-dotenv>=1.2.4",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+maddy-backend = "maddy_backend:main"
+
+[build-system]
+requires = ["uv_build>=0.13.3,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+]
